@@ -32,6 +32,11 @@ small {
   font-weight: 700;
 }
 
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
 @keyframes starfield {
   0% { transform: translateY(0); }
   100% { transform: translateY(-20px); }
