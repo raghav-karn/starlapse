@@ -15,8 +15,8 @@
 Ever wished your favorite site had a dark mode? Or maybe you wanted to see how your favorite site looks in light mode? Starlapse is here to help! This extension allows you to toggle between light and dark themes on any website, giving you the flexibility to customize your browsing experience.
 
 ## 📸 Preview
-![Preview1](images/preview1.png)
-![Preview2](images/preview2.png)
+![Preview1](../images/preview1.png)
+![Preview2](../images/preview2.png)
 
 ## ✨ Features
 
@@ -36,25 +36,20 @@ For full details, please review our comprehensive [Privacy Policy](https://starl
 ## 🚀 Installation
 
 1. Download the latest .zip file from either the Releases, the `starlapse.zip` file in the root of [the repo](https://github.com/raghav-karn/starlapse) or use the files in [`/extension`](https://github.com/raghav-karn/starlapse/tree/main/extension) folder of the repo.
-![Step 1](images/dwd1.png)
+![Step 1](../images/dwd1.png)
 2. Unzip the file in a location of choice on your computer.
-![Step 2](images/dwd2.png)
+![Step 2](../images/dwd2.png)
 3. Open Chrome or any other Chromium-based browser and open the extensions page (`chrome://extensions`).
-![Step 3](images/dwd3.png)
+![Step 3](../images/dwd3.png)
 4. Enable `Developer mode`, click `Load unpacked` and select the folder with the contents of unzipped `starlapse.zip` file.
-![Step 4](images/dwd4.png)
+![Step 4](../images/dwd4.png)
 5. There you have it—Starlapse has been installed on your browser. Enjoy!
 
 ## 💡 How to Use
 
 ### 1️⃣ Toggle the extension
-![Step 1](images/step1.png)
 
-### 2️⃣ Enter the name of the city you want to look up for, and hit Enter
-![Step 2](images/step2.png)
-
-### 3️⃣ View your 'Air Quality Index' and 'Equivalent Cigarettes'
-![Step 3](images/step3.png)
+### 2️⃣ There's no step 2! Your website has been inverted!
 
 ## 🛠️ Made Using
 
