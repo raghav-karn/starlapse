@@ -1,15 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Black Hole Mode",
-  "version": "1.0",
-  "description": "Watch a black hole suck in your webpage and transform it into dark mode!",
+  "name": "Starlapse",
+  "version": "1.0.0",
+  "description": "Watch a black hole suck in your webpage and invert it into light/dark mode!",
+  "author": "Raghav Karn",
+
   "permissions": [
     "activeTab",
     "storage"
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Black Hole Mode"
+    "default_title": "Starlapse"
   },
   "content_scripts": [
     {
