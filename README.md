@@ -1,10 +1,13 @@
 # ⭐ Starlapse 🌠
 
-![Starlapse Icon](extension/icon128.png)
+![Starlapse Icon](extension/icons/icon128.png)
 
 **Starlapse** is a Chrome extension that inverts the colors of your webpage to get a light/dark themed site on  any site you wish! [Download now](https://chromewebstore.google.com/) from the Chrome Web Store, or [directly download the zip](https://github.com/raghav-karn/starlapse/releases/latest/download/starlapse.zip). *By using Starlapse, you acknowledge that you have read and understood [our Privacy Policy](https://starlapse.raghavkarn.com/privacy-policy).*
 
 > [!NOTE]
+Some links in this README may not work at present, including the download link from Chrome Web Store and starlapse.raghavkarn.com. Otherwise, the extension is fully functional and can be downloaded from the [Releases](https://github.com/raghav-karn/starlapse/releases/latest).
+
+> [!WARNING]
 > **Starlapse** can prompt error at times. In such cases, try refreshing the tab or reload the extension. 
 
 > [!IMPORTANT]
