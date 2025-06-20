@@ -91,14 +91,14 @@ a:hover {
   }
 }
 
-.black-hole-container {
+.nomnom-hole-container {
   position: relative;
   width: 180px;
   height: 180px;
   margin: 0 auto 25px;
 }
 
-.black-hole {
+.nomnom-hole {
   position: relative;
   width: 100%;
   height: 100%;
@@ -114,20 +114,20 @@ a:hover {
       rgba(180, 120, 40, 0.2) 85%, 
       rgba(255, 165, 0, 0.1) 95%, 
       transparent 100%);
-  animation: black-hole-rotation 8s linear infinite;
+  animation: nomnom-hole-rotation 8s linear infinite;
   filter: blur(0.5px);
 }
 
-.black-hole.active {
-  animation: black-hole-active 4s linear infinite, black-hole-rotation 8s linear infinite;
+.nomnom-hole.active {
+  animation: nomnom-hole-active 4s linear infinite, nomnom-hole-rotation 8s linear infinite;
 }
 
-@keyframes black-hole-rotation {
+@keyframes nomnom-hole-rotation {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-@keyframes black-hole-active {
+@keyframes nomnom-hole-active {
   0% { 
     filter: blur(0.5px) brightness(1);
     box-shadow: 0 0 30px rgba(255, 165, 0, 0.3);

@@ -7,7 +7,7 @@ class GalacticReader {
     this.readingProgress = 0;
     this.animationFrameId = null;
     this.starField = [];
-    this.quantumParticles = [];
+    this.moronBosons = [];
     this.stopwatchInterval = null;
     this.focusModeActive = false;
     
@@ -57,9 +57,9 @@ class GalacticReader {
       console.log('Could not save persistent state:', error);
     }
     
-    this.createInterstellarGalacticReader();
-    this.initializeInterstellarBackground();
-    this.startAnimationLoop();
+    this.createIntrastellarGalacticReader();
+    this.initializeIntrastellarBackground();
+    this.goKABOOM();
     this.setupReadingProgress();
     this.initializeQuantumEffects();
     this.startStopwatch();
@@ -78,11 +78,11 @@ class GalacticReader {
     }
     
     this.removeGalacticReader();
-    this.stopAnimationLoop();
+    this.stopKABOOM();
     this.stopStopwatch();
   }
   
-  createInterstellarGalacticReader() {
+  createIntrastellarGalacticReader() {
     const existing = document.getElementById(this.readerModeId);
     if (existing) existing.remove();
     
@@ -92,7 +92,7 @@ class GalacticReader {
     readerOverlay.id = this.readerModeId;
     readerOverlay.innerHTML = `
       <div class="galactic-universe-interstellar galaxy-${this.currentGalaxy}">
-        <!-- Enhanced Interstellar Background System -->
+        <!-- Enhanced Intrastellar Background System -->
         <div class="interstellar-backdrop">
           <div class="deep-space-void"></div>
           <div class="galaxy-spiral-arms"></div>
@@ -233,7 +233,7 @@ class GalacticReader {
         transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
       
-      /* Enhanced Interstellar Background System */
+      /* Enhanced Intrastellar Background System */
       .interstellar-backdrop {
         position: absolute;
         top: 0;
@@ -1815,8 +1815,8 @@ class GalacticReader {
     }
   }
   
-  initializeInterstellarBackground() {
-    this.createInterstellarStars();
+  initializeIntrastellarBackground() {
+    this.createIntrastellarStars();
     this.startQuantumParticles();
   }
   
@@ -1851,7 +1851,7 @@ class GalacticReader {
     this.createQuantumParticles();
   }
   
-  createInterstellarStars() {
+  createIntrastellarStars() {
     setInterval(() => {
       if (!this.isActive) return;
       
@@ -1893,7 +1893,7 @@ class GalacticReader {
     document.head.appendChild(style);
   }
   
-  startAnimationLoop() {
+  goKABOOM() {
     const animate = () => {
       if (!this.isActive) return;
       
@@ -1906,18 +1906,18 @@ class GalacticReader {
   }
   
   updateQuantumParticles() {
-    this.quantumParticles.forEach((particle, index) => {
+    this.moronBosons.forEach((particle, index) => {
       if (particle.parentNode) {
         const currentLeft = parseFloat(particle.style.left);
         if (currentLeft < -5) {
           particle.remove();
-          this.quantumParticles.splice(index, 1);
+          this.moronBosons.splice(index, 1);
         }
       }
     });
   }
   
-  stopAnimationLoop() {
+  stopKABOOM() {
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;

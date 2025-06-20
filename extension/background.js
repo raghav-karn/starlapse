@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('🌌 Starlapse v2.0 - Interstellar Edition has been installed!');
+  console.log('🌌 Starlapse v2.0 - Interstellar Edition has been installed! Lesgooo');
   
   chrome.storage.local.set({
     firstLaunch: true,
