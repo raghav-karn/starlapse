@@ -1,4 +1,4 @@
-class BlackHoleController {
+class GalacticController {
   constructor() {
     this.isActive = false;
     this.activateBtn = document.getElementById('activate-btn');
@@ -10,8 +10,8 @@ class BlackHoleController {
   }
   
   init() {
-    this.activateBtn.addEventListener('click', () => this.activateBlackHole());
-    this.deactivateBtn.addEventListener('click', () => this.deactivateBlackHole());
+    this.activateBtn.addEventListener('click', () => this.activateGalacticMode());
+    this.deactivateBtn.addEventListener('click', () => this.deactivateGalacticMode());
     
     this.checkCurrentState();
   }
@@ -29,48 +29,48 @@ class BlackHoleController {
     }
   }
   
-  async activateBlackHole() {
-    this.status.textContent = 'Initializing gravitational field...';
+  async activateGalacticMode() {
+    this.status.textContent = 'Initializing Interstellar mode...';
     this.blackHole.classList.add('active');
     this.activateBtn.classList.add('active');
     
+    await this.sleep(800);
+    
+    this.status.textContent = 'Calibrating cosmic frequencies...';
     await this.sleep(1000);
     
-    this.status.textContent = 'Sucking in photons...';
-    await this.sleep(1000);
-    
-    this.status.textContent = 'Applying dark matter transformation...';
+    this.status.textContent = 'Entering cinematic galaxy...';
     
     try {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      await chrome.tabs.sendMessage(tab.id, { action: 'activateDarkMode' });
+      await chrome.tabs.sendMessage(tab.id, { action: 'activateGalacticMode' });
       
       await this.sleep(1500);
       
       this.showActiveState();
-      this.status.textContent = 'Reality successfully consumed! 🌑';
+      this.status.textContent = 'Welcome to the Interstellar reader! 🌌';
       
     } catch (error) {
-      this.status.textContent = 'Error: Black hole collapsed! Please reload the tab... 💥';
+      this.status.textContent = 'Error: Please reload the page and try again... 💥';
       this.blackHole.classList.remove('active');
       this.activateBtn.classList.remove('active');
     }
   }
   
-  async deactivateBlackHole() {
-    this.status.textContent = 'Reversing spacetime...';
+  async deactivateGalacticMode() {
+    this.status.textContent = 'Exiting the cosmic realm...';
     
     try {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      await chrome.tabs.sendMessage(tab.id, { action: 'deactivateDarkMode' });
+      await chrome.tabs.sendMessage(tab.id, { action: 'deactivateGalacticMode' });
       
       await this.sleep(1000);
       
       this.showInactiveState();
-      this.status.textContent = 'Reality restored! ✨';
+      this.status.textContent = 'Back to normal spacetime! ✨';
       
     } catch (error) {
-      this.status.textContent = 'Error restoring reality! 🌪️';
+      this.status.textContent = 'Error: Please refresh the page! 🌪️';
     }
   }
   
@@ -95,5 +95,5 @@ class BlackHoleController {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  new BlackHoleController();
+  new GalacticController();
 });
