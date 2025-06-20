@@ -1,99 +1,113 @@
-class GalacticController {
-  constructor() {
-    this.isActive = false;
-    this.activateBtn = document.getElementById('activate-btn');
-    this.deactivateBtn = document.getElementById('deactivate-btn');
-    this.status = document.getElementById('status');
-    this.blackHole = document.querySelector('.black-hole');
-    
-    this.init();
+document.addEventListener('DOMContentLoaded', function() {
+  const activateBtn = document.getElementById('activate-btn');
+  const deactivateBtn = document.getElementById('deactivate-btn');
+  const status = document.getElementById('status');
+  
+  const statusMessages = {
+    ready: "Ready to explore the cosmos...",
+    activating: "Initializing galactic coordinates...",
+    active: "🌌 Galactic mode active",
+    deactivating: "Returning to Earth...",
+    error: "⚠️ Cosmic interference detected"
+  };
+  
+  function updateStatus(message, type = 'normal') {
+    status.textContent = message;
+    status.className = `status ${type}`;
   }
   
-  init() {
-    this.activateBtn.addEventListener('click', () => this.activateGalacticMode());
-    this.deactivateBtn.addEventListener('click', () => this.deactivateGalacticMode());
-    
-    this.checkCurrentState();
+  function checkCurrentState() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {action: 'checkState'}, function(response) {
+        if (chrome.runtime.lastError) {
+          updateStatus(statusMessages.ready);
+          activateBtn.style.display = 'block';
+          deactivateBtn.style.display = 'none';
+        } else if (response && response.isActive) {
+          updateStatus(statusMessages.active, 'active');
+          activateBtn.style.display = 'none';
+          deactivateBtn.style.display = 'block';
+        } else {
+          updateStatus(statusMessages.ready);
+          activateBtn.style.display = 'block';
+          deactivateBtn.style.display = 'none';
+        }
+      });
+    });
   }
   
-  async checkCurrentState() {
-    try {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      const result = await chrome.tabs.sendMessage(tab.id, { action: 'checkState' });
-      
-      if (result && result.isActive) {
-        this.showActiveState();
+  activateBtn.addEventListener('click', function() {
+    updateStatus(statusMessages.activating, 'loading');
+    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {action: 'activateGalacticMode'}, function(response) {
+        if (chrome.runtime.lastError) {
+          updateStatus(statusMessages.error, 'error');
+          setTimeout(() => updateStatus(statusMessages.ready), 2000);
+        } else {
+          updateStatus(statusMessages.active, 'active');
+          activateBtn.style.display = 'none';
+          deactivateBtn.style.display = 'block';
+          
+          triggerCosmicActivation();
+        }
+      });
+    });
+  });
+  
+  deactivateBtn.addEventListener('click', function() {
+    updateStatus(statusMessages.deactivating, 'loading');
+    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {action: 'deactivateGalacticMode'}, function(response) {
+        updateStatus(statusMessages.ready);
+        activateBtn.style.display = 'block';
+        deactivateBtn.style.display = 'none';
+      });
+    });
+  });
+  
+  function triggerCosmicActivation() {
+    const container = document.querySelector('.container');
+    const effect = document.createElement('div');
+    effect.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, transparent 70%);
+      animation: cosmic-pulse 1.5s ease-out forwards;
+      pointer-events: none;
+      border-radius: 15px;
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes cosmic-pulse {
+        0% { opacity: 0; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.05); }
+        100% { opacity: 0; transform: scale(1.2); }
       }
-    } catch (error) {
-      console.log('Could not check state:', error);
-    }
+    `;
+    document.head.appendChild(style);
+    
+    container.appendChild(effect);
+    
+    setTimeout(() => {
+      effect.remove();
+      style.remove();
+    }, 1500);
   }
   
-  async activateGalacticMode() {
-    this.status.textContent = 'Initializing Interstellar mode...';
-    this.blackHole.classList.add('active');
-    this.activateBtn.classList.add('active');
-    
-    await this.sleep(800);
-    
-    this.status.textContent = 'Calibrating cosmic frequencies...';
-    await this.sleep(1000);
-    
-    this.status.textContent = 'Entering cinematic galaxy...';
-    
-    try {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      await chrome.tabs.sendMessage(tab.id, { action: 'activateGalacticMode' });
-      
-      await this.sleep(1500);
-      
-      this.showActiveState();
-      this.status.textContent = 'Welcome to the Interstellar reader! 🌌';
-      
-    } catch (error) {
-      this.status.textContent = 'Error: Please reload the page and try again... 💥';
-      this.blackHole.classList.remove('active');
-      this.activateBtn.classList.remove('active');
-    }
-  }
+  checkCurrentState();
   
-  async deactivateGalacticMode() {
-    this.status.textContent = 'Exiting the cosmic realm...';
-    
-    try {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      await chrome.tabs.sendMessage(tab.id, { action: 'deactivateGalacticMode' });
-      
-      await this.sleep(1000);
-      
-      this.showInactiveState();
-      this.status.textContent = 'Back to normal spacetime! ✨';
-      
-    } catch (error) {
-      this.status.textContent = 'Error: Please refresh the page! 🌪️';
-    }
+  const blackHole = document.querySelector('.black-hole');
+  if (blackHole) {
+    blackHole.addEventListener('click', function() {
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {action: 'triggerCosmicEvent', event: 'supernova'});
+      });
+    });
   }
-  
-  showActiveState() {
-    this.isActive = true;
-    this.activateBtn.style.display = 'none';
-    this.deactivateBtn.style.display = 'inline-block';
-    this.blackHole.classList.add('active');
-  }
-  
-  showInactiveState() {
-    this.isActive = false;
-    this.activateBtn.style.display = 'inline-block';
-    this.deactivateBtn.style.display = 'none';
-    this.blackHole.classList.remove('active');
-    this.activateBtn.classList.remove('active');
-  }
-  
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  new GalacticController();
 });
